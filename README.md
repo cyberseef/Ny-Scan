@@ -12,4 +12,4 @@ NOTE: Download in Kali Linux/Parrot (preferred)
 2. ``` sudo scaning.py host <ip-address> ```
 ### Port Discovery
 1. Open Kali Terminal
-2. sudo scaning.py port <ip-address>
+2. ```sudo scaning.py port <ip-address>```
