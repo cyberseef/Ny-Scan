@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Ny-Scan: Host and Port Discovery Scanner using Nmap
-Author: [Your Name]
+Author: [Cyberseef]
 Description: Professional Python script for host and port discovery using Nmap.
 """
 import argparse
