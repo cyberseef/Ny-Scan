@@ -2,6 +2,9 @@
 
 Ny-Scan is a professional Python tool for host and port discovery, leveraging the power of Nmap. It provides a convenient command-line interface for performing a variety of network reconnaissance scans, making it ideal for penetration testers, network administrators, and cybersecurity enthusiasts.
 
+## Author
+**Cyberseef**
+
 ## Features
 - Host discovery using multiple Nmap techniques
 - Port discovery with advanced scan types
@@ -57,6 +60,3 @@ Contributions are welcome! Please open issues or submit pull requests for improv
 
 ## License
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
-
-## Contact
-For questions or support, please contact [your.email@example.com](mailto:your.email@example.com).
