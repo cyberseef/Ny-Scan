@@ -9,6 +9,7 @@ Ny-Scan is a professional Python tool for host and port discovery, leveraging th
 - Host discovery using multiple Nmap techniques
 - Port discovery with advanced scan types
 - Easy-to-use command-line interface
+- Interactive menu for beginners
 - Informative logging and error handling
 - Designed for Linux environments (Kali/Parrot preferred)
 
@@ -39,27 +40,40 @@ Ny-Scan is a professional Python tool for host and port discovery, leveraging th
 ## Usage
 Run the script with root privileges for best results.
 
-### Host Discovery
-Scan a single IP, subnet, or IP range:
+### Interactive Menu (Recommended for Beginners)
+If you run the script without any arguments, an interactive menu will guide you through selecting the scan mode, entering the target, and (for port scans) specifying ports:
+
 ```bash
-sudo python3 scaning.py --mode host --target 192.168.1.1
-sudo python3 scaning.py --mode host --target 192.168.1.0/24
-sudo python3 scaning.py --mode host --target 192.168.1.10-192.168.1.20
+sudo python3 scaning.py
 ```
 
-### Port Discovery
-Scan specific ports, a list, or a range (default: 1-1024):
-```bash
-sudo python3 scaning.py --mode port --target 192.168.1.10 --ports 22
-sudo python3 scaning.py --mode port --target 192.168.1.10 --ports 22,80,443
-sudo python3 scaning.py --mode port --target 192.168.1.10 --ports 1000-2000
-sudo python3 scaning.py --mode port --target 192.168.1.10-192.168.1.20 --ports 80,443
-```
+You will be prompted to:
+- Select scan mode (host or port discovery)
+- Enter the target (IP, range, subnet, or hostname)
+- (For port scan) Enter ports (single, comma-separated, or range; default: 1-1024)
 
-#### Arguments
-- `--mode`   : host or port (required)
-- `--target` : IP address, IP range, subnet, or hostname (required)
-- `--ports`  : (port scan only) single port, comma-separated list, or range (optional; default: 1-1024)
+### Command-line Arguments (Advanced/Scriptable)
+- `--mode` (required if not using menu): `host` for host discovery, `port` for port discovery
+- `--target` (required if not using menu): Target IP address, range, subnet, or hostname (e.g., `192.168.1.1`, `192.168.1.0/24`, `192.168.1.1-10`)
+- `--ports` (optional, port scan only): Ports to scan (single, comma-separated, or range, e.g., `80,443,1000-2000`). Default: `1-1024`
+
+#### Examples
+- Host Discovery (on a subnet):
+  ```bash
+  sudo python3 scaning.py --mode host --target 192.168.1.0/24
+  ```
+- Port Discovery (on a single IP and specific ports):
+  ```bash
+  sudo python3 scaning.py --mode port --target 192.168.1.10 --ports 22,80,443
+  ```
+- Port Discovery (on a range of IPs and port range):
+  ```bash
+  sudo python3 scaning.py --mode port --target 192.168.1.10-192.168.1.20 --ports 1000-2000
+  ```
+- Port Discovery (default ports 1-1024):
+  ```bash
+  sudo python3 scaning.py --mode port --target 192.168.1.10
+  ```
 
 ## Contributing
 Contributions are welcome! Please open issues or submit pull requests for improvements.
