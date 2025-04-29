@@ -37,23 +37,29 @@ Ny-Scan is a professional Python tool for host and port discovery, leveraging th
    ```
 
 ## Usage
-Run the script with root privileges for best results:
+Run the script with root privileges for best results.
 
 ### Host Discovery
+Scan a single IP, subnet, or IP range:
 ```bash
-sudo python3 scaning.py host <target-ip>
+sudo python3 scaning.py --mode host --target 192.168.1.1
+sudo python3 scaning.py --mode host --target 192.168.1.0/24
+sudo python3 scaning.py --mode host --target 192.168.1.10-192.168.1.20
 ```
 
 ### Port Discovery
+Scan specific ports, a list, or a range (default: 1-1024):
 ```bash
-sudo python3 scaning.py port <target-ip>
+sudo python3 scaning.py --mode port --target 192.168.1.10 --ports 22
+sudo python3 scaning.py --mode port --target 192.168.1.10 --ports 22,80,443
+sudo python3 scaning.py --mode port --target 192.168.1.10 --ports 1000-2000
+sudo python3 scaning.py --mode port --target 192.168.1.10-192.168.1.20 --ports 80,443
 ```
 
-#### Example
-```bash
-sudo python3 scaning.py host 192.168.1.1
-sudo python3 scaning.py port 192.168.1.1
-```
+#### Arguments
+- `--mode`   : host or port (required)
+- `--target` : IP address, IP range, subnet, or hostname (required)
+- `--ports`  : (port scan only) single port, comma-separated list, or range (optional; default: 1-1024)
 
 ## Contributing
 Contributions are welcome! Please open issues or submit pull requests for improvements.
