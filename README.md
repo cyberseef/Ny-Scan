@@ -7,7 +7,7 @@ Ny-Scan is a professional Python tool for host and port discovery, leveraging th
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Interactive Menu vs. CLI](#interactive-menu-vs-cli)
+- [Interactive Menu vs. CLI vs. GUI](#interactive-menu-vs-cli-vs-gui)
 - [Examples](#examples)
 - [License](#license)
 - [Contributing](#contributing)
@@ -46,25 +46,38 @@ Ny-Scan is a professional Python tool for host and port discovery, leveraging th
    ```bash
    sudo apt update && sudo apt install nmap
    ```
+5. (Optional, for GUI) Install Tkinter if not already available:
+   ```bash
+   sudo apt install python3-tk
+   ```
 
 ## Usage
 Run the script with root privileges for best results.
 
-## Interactive Menu vs. CLI
+### CLI Usage
+- Run the CLI as before:
+  ```bash
+  sudo python3 scaning.py
+  ```
+  or with arguments:
+  ```bash
+  sudo python3 scaning.py --mode port --target 192.168.1.10 --ports 22,80,443
+  ```
+
+### GUI Usage
+- Run the GUI (requires Tkinter):
+  ```bash
+  sudo python3 gui.py
+  ```
+- The GUI provides fields for scan mode, target, and ports, and displays results in a user-friendly window.
+
+## Interactive Menu vs. CLI vs. GUI
 - **Interactive Menu:**
-  - If you run the script without any arguments, an interactive menu will guide you through selecting the scan mode, entering the target, and (for port scans) specifying ports.
-  - Recommended for beginners or when you want a guided experience.
-  - Example:
-    ```bash
-    sudo python3 scaning.py
-    ```
+  - If you run the CLI script without any arguments, an interactive menu will guide you through selecting the scan mode, entering the target, and (for port scans) specifying ports.
 - **Command-line Arguments (CLI):**
-  - If you provide any of the CLI arguments (`--mode`, `--target`, etc.), the script will use those and skip the menu.
-  - Recommended for advanced users, automation, or scripting.
-  - Example:
-    ```bash
-    sudo python3 scaning.py --mode port --target 192.168.1.10 --ports 22,80,443
-    ```
+  - Provide CLI arguments (`--mode`, `--target`, etc.) to skip the menu.
+- **Graphical User Interface (GUI):**
+  - Use the GUI for a point-and-click experience. All scanning logic is shared with the CLI for consistency.
 
 ## Command-line Arguments
 - `--mode` (required if not using menu): `host` for host discovery, `port` for port discovery

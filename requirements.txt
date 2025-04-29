@@ -1,3 +1,5 @@
 # requirements.txt
-# No external Python packages required for Ny-Scan
-# System dependency: nmap must be installed and available in PATH 
+# No external Python packages required for Ny-Scan CLI
+# System dependency: nmap must be installed and available in PATH
+# For GUI: Tkinter (usually included with Python, but may require 'python3-tk' on some systems)
+# Source code is now in the src/ directory 
