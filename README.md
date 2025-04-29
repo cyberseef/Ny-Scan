@@ -2,8 +2,17 @@
 
 Ny-Scan is a professional Python tool for host and port discovery, leveraging the power of Nmap. It provides a convenient command-line interface for performing a variety of network reconnaissance scans, making it ideal for penetration testers, network administrators, and cybersecurity enthusiasts.
 
-## Author
-**Cyberseef**
+## Table of Contents
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Interactive Menu vs. CLI](#interactive-menu-vs-cli)
+- [Examples](#examples)
+- [License](#license)
+- [Contributing](#contributing)
+- [Code of Conduct](#code-of-conduct)
+- [Acknowledgements](#acknowledgements)
 
 ## Features
 - Host discovery using multiple Nmap techniques
@@ -16,6 +25,7 @@ Ny-Scan is a professional Python tool for host and port discovery, leveraging th
 ## Requirements
 - Python 3.7+
 - [Nmap](https://nmap.org/) must be installed and available in your system PATH
+- See `requirements.txt` for details
 
 ## Installation
 1. Clone this repository or download `scaning.py`:
@@ -28,7 +38,7 @@ Ny-Scan is a professional Python tool for host and port discovery, leveraging th
    python3 -m venv venv
    source venv/bin/activate
    ```
-3. Install Python dependencies (if any):
+3. Install Python dependencies:
    ```bash
    pip install -r requirements.txt
    ```
@@ -40,24 +50,28 @@ Ny-Scan is a professional Python tool for host and port discovery, leveraging th
 ## Usage
 Run the script with root privileges for best results.
 
-### Interactive Menu (Recommended for Beginners)
-If you run the script without any arguments, an interactive menu will guide you through selecting the scan mode, entering the target, and (for port scans) specifying ports:
+## Interactive Menu vs. CLI
+- **Interactive Menu:**
+  - If you run the script without any arguments, an interactive menu will guide you through selecting the scan mode, entering the target, and (for port scans) specifying ports.
+  - Recommended for beginners or when you want a guided experience.
+  - Example:
+    ```bash
+    sudo python3 scaning.py
+    ```
+- **Command-line Arguments (CLI):**
+  - If you provide any of the CLI arguments (`--mode`, `--target`, etc.), the script will use those and skip the menu.
+  - Recommended for advanced users, automation, or scripting.
+  - Example:
+    ```bash
+    sudo python3 scaning.py --mode port --target 192.168.1.10 --ports 22,80,443
+    ```
 
-```bash
-sudo python3 scaning.py
-```
-
-You will be prompted to:
-- Select scan mode (host or port discovery)
-- Enter the target (IP, range, subnet, or hostname)
-- (For port scan) Enter ports (single, comma-separated, or range; default: 1-1024)
-
-### Command-line Arguments (Advanced/Scriptable)
+## Command-line Arguments
 - `--mode` (required if not using menu): `host` for host discovery, `port` for port discovery
 - `--target` (required if not using menu): Target IP address, range, subnet, or hostname (e.g., `192.168.1.1`, `192.168.1.0/24`, `192.168.1.1-10`)
 - `--ports` (optional, port scan only): Ports to scan (single, comma-separated, or range, e.g., `80,443,1000-2000`). Default: `1-1024`
 
-#### Examples
+## Examples
 - Host Discovery (on a subnet):
   ```bash
   sudo python3 scaning.py --mode host --target 192.168.1.0/24
@@ -75,8 +89,15 @@ You will be prompted to:
   sudo python3 scaning.py --mode port --target 192.168.1.10
   ```
 
-## Contributing
-Contributions are welcome! Please open issues or submit pull requests for improvements.
-
 ## License
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+
+## Contributing
+Contributions are welcome! Please open issues or submit pull requests for improvements. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+## Code of Conduct
+Please note that this project adheres to a [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
+
+## Acknowledgements
+- [Nmap](https://nmap.org/)
+- Python community
