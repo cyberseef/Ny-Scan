@@ -1,24 +1,29 @@
 # Ny-Scan
 
-Ny-Scan is a professional Python tool for host and port discovery, leveraging the power of Nmap. It provides a convenient command-line interface for performing a variety of network reconnaissance scans, making it ideal for penetration testers, network administrators, and cybersecurity enthusiasts.
+Ny-Scan is a professional Python tool for host and port discovery, leveraging the power of Nmap. It provides a convenient command-line interface and a modern GUI for performing a variety of network reconnaissance scans, making it ideal for penetration testers, network administrators, and cybersecurity enthusiasts.
 
-## Table of Contents
-- [Features](#features)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Interactive Menu vs. CLI vs. GUI](#interactive-menu-vs-cli-vs-gui)
-- [Examples](#examples)
-- [License](#license)
-- [Contributing](#contributing)
-- [Code of Conduct](#code-of-conduct)
-- [Acknowledgements](#acknowledgements)
+## Project Structure
+```
+Ny-Scan/
+├── src/
+│   ├── gui.py         # Graphical User Interface (GUI)
+│   ├── scanner.py     # Core scanning logic
+│   └── scaning.py     # Command-Line Interface (CLI)
+├── requirements.txt
+├── README.md
+├── LICENSE
+└── ...
+```
+
+## Where to Find the CLI and GUI
+- The **command-line interface (CLI)** is in: `src/scaning.py`
+- The **graphical user interface (GUI)** is in: `src/gui.py`
 
 ## Features
 - Host discovery using multiple Nmap techniques
 - Port discovery with advanced scan types
 - Easy-to-use command-line interface
-- Interactive menu for beginners
+- Modern graphical user interface (GUI)
 - Informative logging and error handling
 - Designed for Linux environments (Kali/Parrot preferred)
 
@@ -28,7 +33,7 @@ Ny-Scan is a professional Python tool for host and port discovery, leveraging th
 - See `requirements.txt` for details
 
 ## Installation
-1. Clone this repository or download `scaning.py`:
+1. Clone this repository:
    ```bash
    git clone https://github.com/yourusername/Ny-Scan.git
    cd Ny-Scan
@@ -55,19 +60,19 @@ Ny-Scan is a professional Python tool for host and port discovery, leveraging th
 Run the script with root privileges for best results.
 
 ### CLI Usage
-- Run the CLI as before:
+- Run the CLI:
   ```bash
-  sudo python3 scaning.py
+  sudo python3 src/scaning.py
   ```
   or with arguments:
   ```bash
-  sudo python3 scaning.py --mode port --target 192.168.1.10 --ports 22,80,443
+  sudo python3 src/scaning.py --mode port --target 192.168.1.10 --ports 22,80,443
   ```
 
 ### GUI Usage
 - Run the GUI (requires Tkinter):
   ```bash
-  sudo python3 gui.py
+  sudo python3 src/gui.py
   ```
 - The GUI provides fields for scan mode, target, and ports, and displays results in a user-friendly window.
 
@@ -87,19 +92,19 @@ Run the script with root privileges for best results.
 ## Examples
 - Host Discovery (on a subnet):
   ```bash
-  sudo python3 scaning.py --mode host --target 192.168.1.0/24
+  sudo python3 src/scaning.py --mode host --target 192.168.1.0/24
   ```
 - Port Discovery (on a single IP and specific ports):
   ```bash
-  sudo python3 scaning.py --mode port --target 192.168.1.10 --ports 22,80,443
+  sudo python3 src/scaning.py --mode port --target 192.168.1.10 --ports 22,80,443
   ```
 - Port Discovery (on a range of IPs and port range):
   ```bash
-  sudo python3 scaning.py --mode port --target 192.168.1.10-192.168.1.20 --ports 1000-2000
+  sudo python3 src/scaning.py --mode port --target 192.168.1.10-192.168.1.20 --ports 1000-2000
   ```
 - Port Discovery (default ports 1-1024):
   ```bash
-  sudo python3 scaning.py --mode port --target 192.168.1.10
+  sudo python3 src/scaning.py --mode port --target 192.168.1.10
   ```
 
 ## License
