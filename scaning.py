@@ -1,43 +1,66 @@
+#!/usr/bin/env python3
+"""
+Ny-Scan: Host and Port Discovery Scanner using Nmap
+Author: [Your Name]
+Description: Professional Python script for host and port discovery using Nmap.
+"""
+import argparse
 import subprocess
 import sys
+import logging
+from typing import List
 
-def run_scan(command):
+logging.basicConfig(
+    level=logging.INFO,
+    format='[%(levelname)s] %(message)s'
+)
+
+def run_scan(command: List[str]) -> None:
+    """
+    Run a scan command using subprocess and handle errors.
+    """
     try:
+        logging.info(f"Running: {' '.join(command)}")
         process = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True)
         print(process.stdout)
-
         if "Host seems down" in process.stdout:
-            print("Host seems down, retrying with -Pn...")
-            command.append("-Pn")  # Add -Pn to the command list
+            logging.warning("Host seems down, retrying with -Pn...")
+            command.append("-Pn")
             process_retry = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True)
             print(process_retry.stdout)
-
     except subprocess.CalledProcessError as e:
-        print(f"Error executing command: {e.cmd}")
+        logging.error(f"Error executing command: {e.cmd}")
         print(e.output)
 
-def host_scanning(target):
+
+def host_scanning(target: str) -> None:
+    """
+    Perform various host discovery scans on the target.
+    """
     scans = {
         "ARP Ping Scan": ["nmap", "-PR", target],
         "ICMP Echo Ping": ["nmap", "-PE", target],
         "ICMP Echo Ping Sweep": ["nmap", "-sn", "-PE", target],
         "ICMP Timestamp Ping": ["nmap", "-PP", target],
         "ICMP Address Mask Ping": ["nmap", "-PM", target],
-        "UDP Ping Scan": ["nmap", "-sU", "-p", "80", target],  # Example: Scanning port 80
+        "UDP Ping Scan": ["nmap", "-sU", "-p", "80", target],
         "TCP SYN Scan": ["nmap", "-sS", target],
         "TCP ACK Scan": ["nmap", "-sA", target],
         "TCP Null Scan": ["nmap", "-sN", target],
         "TCP XMAS Scan": ["nmap", "-sX", target],
         "TCP FIN Scan": ["nmap", "-sF", target],
-        "IP Protocol Scan": ["nmap", "-sO", "-p", "1,6,17", target]  # ICMP, TCP, UDP
+        "IP Protocol Scan": ["nmap", "-sO", "-p", "1,6,17", target]
     }
-
     for scan_name, command in scans.items():
-        print(f"Starting {scan_name}...")
+        logging.info(f"Starting {scan_name}...")
         run_scan(command)
-        print(f"Completed {scan_name}\n")
+        logging.info(f"Completed {scan_name}\n")
 
-def port_scanning(target):
+
+def port_scanning(target: str) -> None:
+    """
+    Perform various port discovery scans on the target.
+    """
     scans = {
         "ICMP Ping Scan": ["nmap", "-sn", target, "-v"],
         "UDP Ping Scan": ["nmap", "-sU", "-p", "80", target, "-v"],
@@ -51,24 +74,36 @@ def port_scanning(target):
         "TTL Based Scan": ["nmap", "--ttl", "128", "-sA", target, "-v"],
         "Window Scan": ["nmap", "-sW", target, "-v"]
     }
-
     for scan_name, command in scans.items():
-        print(f"Starting {scan_name}...")
+        logging.info(f"Starting {scan_name}...")
         run_scan(command)
-        print(f"Completed {scan_name}\n")
+        logging.info(f"Completed {scan_name}\n")
 
-def main():
-    if len(sys.argv) != 3:
-        print("Usage: python3 script.py <port> <target>")
-        sys.exit(1)
 
-    mode = sys.argv[1].lower()
-    target_ip = sys.argv[2]
+def main() -> None:
+    """
+    Main entry point for the CLI.
+    """
+    parser = argparse.ArgumentParser(
+        description="Ny-Scan: Host and Port Discovery Scanner using Nmap"
+    )
+    parser.add_argument(
+        "mode",
+        choices=["host", "port"],
+        help="Choose 'host' for host discovery or 'port' for port discovery."
+    )
+    parser.add_argument(
+        "target",
+        help="Target IP address or hostname."
+    )
+    args = parser.parse_args()
 
-    if mode == "port":
-        port_scanning(target_ip)
+    if args.mode == "host":
+        host_scanning(args.target)
+    elif args.mode == "port":
+        port_scanning(args.target)
     else:
-        print("Invalid mode selected. Use 'port' for port scanning.")
+        parser.print_help()
         sys.exit(1)
 
 if __name__ == "__main__":

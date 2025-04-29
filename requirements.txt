@@ -1,0 +1,3 @@
+# requirements.txt
+# No external Python packages required for Ny-Scan
+# System dependency: nmap must be installed and available in PATH 
